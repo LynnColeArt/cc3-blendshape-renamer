@@ -1,64 +1,71 @@
 import bpy
 
-for shapekey in bpy.data.shape_keys:
-    # rename / translate shape key names by changing shapekey.name
-    for keyblock in shapekey.key_blocks:
-        
-        print ("Now processing... ")
-        print (keyblock.name)
-        
-        if keyblock.name == "A01_Brow_Inner_Up": keyblock.name = "browInnerUp"
-        if keyblock.name == "A02_Brow_Down_Left": keyblock.name = "browDownLeft"
-        if keyblock.name == "A03_Brow_Down_Right": keyblock.name = "browDownRight"
-        if keyblock.name == "A04_Brow_Outer_Up_Left": keyblock.name = "browOuterUpLeft"
-        if keyblock.name == "A05_Brow_Outer_Up_Right": keyblock.name = "browOuterUpRight"
-        if keyblock.name == "A06_Eye_Look_Up_Left": keyblock.name = "eyeLookUpLeft"
-        if keyblock.name == "A07_Eye_Look_Up_Right": keyblock.name = "eyeLookUpRight"
-        if keyblock.name == "A08_Eye_Look_Down_Left": keyblock.name = "eyeLookDownLeft"
-        if keyblock.name == "A09_Eye_Look_Down_Right": keyblock.name = "eyeLookDownRight"
-        if keyblock.name == "A10_Eye_Look_Out_Left": keyblock.name = "eyeLookOutLeft"
-        if keyblock.name == "A11_Eye_Look_In_Left": keyblock.name = "eyeLookInLeft"
-        if keyblock.name == "A12_Eye_Look_In_Right": keyblock.name = "eyeLookInRight"
-        if keyblock.name == "A13_Eye_Look_Out_Right": keyblock.name = "eyeLookOutRight"
-        if keyblock.name == "A14_Eye_Blink_Left": keyblock.name = "eyeBlinkLeft"
-        if keyblock.name == "A15_Eye_Blink_Right": keyblock.name = "eyeBlinkRight"
-        if keyblock.name == "A16_Eye_Squint_Left": keyblock.name = "eyeSquintLeft"
-        if keyblock.name == "A17_Eye_Squint_Right": keyblock.name = "eyeSquintRight"
-        if keyblock.name == "A18_Eye_Wide_Left": keyblock.name = "eyeWideLeft"
-        if keyblock.name == "A19_Eye_Wide_Right": keyblock.name = "eyeWideRight"
-        if keyblock.name == "A20_Cheek_Puff": keyblock.name = "cheekPuff"
-        if keyblock.name == "A21_Cheek_Squint_Left": keyblock.name = "cheekSquintLeft"
-        if keyblock.name == "A22_Cheek_Squint_Right": keyblock.name = "cheekSquintRight"
-        if keyblock.name == "A23_Nose_Sneer_Left": keyblock.name = "noseSneerLeft"
-        if keyblock.name == "A24_Nose_Sneer_Right": keyblock.name = "noseSneerRight"
-        if keyblock.name == "A25_Jaw_Open": keyblock.name = "--DeleteThis--"
-        if keyblock.name == "A26_Jaw_Forward": keyblock.name = "jawForward"
-        if keyblock.name == "A27_Jaw_Left": keyblock.name = "jawLeft"
-        if keyblock.name == "A28_Jaw_Right": keyblock.name = "jawRight"
-        if keyblock.name == "A29_Mouth_Funnel": keyblock.name = "mouthFunnel"
-        if keyblock.name == "A30_Mouth_Pucker": keyblock.name = "mouthPucker"
-        if keyblock.name == "A31_Mouth_Left": keyblock.name = "mouthLeft"
-        if keyblock.name == "A32_Mouth_Right": keyblock.name = "mouthRight"
-        if keyblock.name == "A33_Mouth_Roll_Upper": keyblock.name = "mouthRollUpper"
-        if keyblock.name == "A34_Mouth_Roll_Lower": keyblock.name = "mouthRollLower"
-        if keyblock.name == "A35_Mouth_Shrug_Upper": keyblock.name = "mouthShrugUpper"
-        if keyblock.name == "A36_Mouth_Shrug_Lower": keyblock.name = "mouthShrugLower"
-        if keyblock.name == "A37_Mouth_Close": keyblock.name = "mouthClose"
-        if keyblock.name == "A38_Mouth_Smile_Left": keyblock.name = "mouthSmileLeft"
-        if keyblock.name == "A39_Mouth_Smile_Right": keyblock.name = "mouthSmileRight"
-        if keyblock.name == "A40_Mouth_Frown_Left": keyblock.name = "mouthFrownLeft"
-        if keyblock.name == "A41_Mouth_Frown_Right": keyblock.name = "mouthFrownRight"
-        if keyblock.name == "A42_Mouth_Dimple_Left": keyblock.name = "mouthDimpleLeft"
-        if keyblock.name == "A43_Mouth_Dimple_Right": keyblock.name = "mouthDimpleRight"
-        if keyblock.name == "A44_Mouth_Upper_Up_Left": keyblock.name = "mouthUpperUpLeft"
-        if keyblock.name == "A45_Mouth_Upper_Up_Right": keyblock.name = "mouthUpperUpRight"
-        if keyblock.name == "A46_Mouth_Lower_Down_Left": keyblock.name = "mouthLowerDownLeft"
-        if keyblock.name == "A47_Mouth_Lower_Down_Right": keyblock.name = "mouthLowerDownRight"
-        if keyblock.name == "A48_Mouth_Press_Left": keyblock.name = "mouthPressLeft"
-        if keyblock.name == "A49_Mouth_Press_Right": keyblock.name = "mouthPressRight"
-        if keyblock.name == "A50_Mouth_Stretch_Left": keyblock.name = "mouthStretchLeft"
-        if keyblock.name == "A51_Mouth_Stretch_Right": keyblock.name = "mouthStretchRight"
-        if keyblock.name == "A52_Tongue_Out": keyblock.name = "tongueOut"
-        if keyblock.name == "Merged_Open_Mouth": keyblock.name = "jawOpen"
-        
-        print ("All done!")
+def rename_shapekeys(shapekey_mapping):
+    for shapekey in bpy.data.shape_keys:
+        for keyblock in shapekey.key_blocks:
+            old_name = keyblock.name
+            new_name = shapekey_mapping.get(old_name)
+            
+            if new_name:
+                print(f"Now processing: {old_name}")
+                keyblock.name = new_name
+                print(f"Renamed to: {new_name}")
+            else:
+                print(f"Skipped: {old_name}")
+
+shapekey_mapping = {
+    "A01_Brow_Inner_Up": "browInnerUp",
+    "A02_Brow_Down_Left": "browDownLeft",
+    "A03_Brow_Down_Right": "browDownRight",
+    "A04_Brow_Outer_Up_Left": "browOuterUpLeft",
+    "A05_Brow_Outer_Up_Right": "browOuterUpRight",
+    "A06_Eye_Look_Up_Left": "eyeLookUpLeft",
+    "A07_Eye_Look_Up_Right": "eyeLookUpRight",
+    "A08_Eye_Look_Down_Left": "eyeLookDownLeft",
+    "A09_Eye_Look_Down_Right": "eyeLookDownRight",
+    "A10_Eye_Look_Out_Left": "eyeLookOutLeft",
+    "A11_Eye_Look_In_Left": "eyeLookInLeft",
+    "A12_Eye_Look_In_Right": "eyeLookInRight",
+    "A13_Eye_Look_Out_Right": "eyeLookOutRight",
+    "A14_Eye_Blink_Left": "eyeBlinkLeft",
+    "A15_Eye_Blink_Right": "eyeBlinkRight",
+    "A16_Eye_Squint_Left": "eyeSquintLeft",
+    "A17_Eye_Squint_Right": "eyeSquintRight",
+    "A18_Eye_Wide_Left": "eyeWideLeft",
+    "A19_Eye_Wide_Right": "eyeWideRight",
+    "A20_Cheek_Puff": "cheekPuff",
+    "A21_Cheek_Squint_Left": "cheekSquintLeft",
+    "A22_Cheek_Squint_Right": "cheekSquintRight",
+    "A23_Nose_Sneer_Left": "noseSneerLeft",
+    "A24_Nose_Sneer_Right": "noseSneerRight",
+    "A26_Jaw_Forward": "jawForward",
+    "A27_Jaw_Left": "jawLeft",
+    "A28_Jaw_Right": "jawRight",
+    "A29_Mouth_Funnel": "mouthFunnel",
+    "A30_Mouth_Pucker": "mouthPucker",
+    "A31_Mouth_Left": "mouthLeft",
+    "A32_Mouth_Right": "mouthRight",
+    "A33_Mouth_Roll_Upper": "mouthRollUpper",
+    "A34_Mouth_Roll_Lower": "mouthRollLower",
+    "A35_Mouth_Shrug_Upper": "mouthShrugUpper",
+    "A36_Mouth_Shrug_Lower": "mouthShrugLower",
+    "A37_Mouth_Close": "mouthClose",
+    "A38_Mouth_Smile_Left": "mouthSmileLeft",
+    "A39_Mouth_Smile_Right": "mouthSmileRight",
+    "A40_Mouth_Frown_Left": "mouthFrownLeft",
+    "A41_MouthFrown_Right": "mouthFrownRight",
+    "A42_Mouth_Dimple_Left": "mouthDimpleLeft",
+    "A43_Mouth_Dimple_Right": "mouthDimpleRight",
+    "A44_Mouth_Upper_Up_Left": "mouthUpperUpLeft",
+    "A45_Mouth_Upper_Up_Right": "mouthUpperUpRight",
+    "A46_Mouth_Lower_Down_Left": "mouthLowerDownLeft",
+    "A47_Mouth_Lower_Down_Right": "mouthLowerDownRight",
+    "A48_Mouth_Press_Left": "mouthPressLeft",
+    "A49_Mouth_Press_Right": "mouthPressRight",
+    "A50_Mouth_Stretch_Left": "mouthStretchLeft",
+    "A51_Mouth_Stretch_Right": "mouthStretchRight",
+    "A52_Tongue_Out": "tongueOut",
+    "Merged_Open_Mouth": "jawOpen",
+}
+
+rename_shapekeys(shapekey_mapping)
