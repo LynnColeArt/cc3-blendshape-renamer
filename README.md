@@ -2,7 +2,7 @@
 
 ### Note: 
 
-(This one was designed before CC4 implemented the new facial profile system and face wrinkes. You can still use it, and it still works with the older ARKIT facial profile which you have the option of loading up, but the older ARKIT profile is not as good as the more modern Standard and Extended facial profiles. I've been meaning to do an update for the code that will cover those, however Reallusion still has bugs pending with the FBX blendshapes exporter that cause duplicate blendshapes in Blender, that would make my adjustments unreliable.)
+(This one was designed before CC4 implemented the new facial profile system and face wrinkes. You can still use it, and it still works with the older ARKIT facial profile which you have the option of loading up, but the older ARKIT profile is not as good as the more modern Standard and Extended facial profiles. I've been meaning to do an update for the code that will cover those, however Reallusion still has bugs pending with the FBX blendshapes exporter that cause duplicate blendshapes in Blender, that would make my adjustments unreliable. Additionally, now you also have the option of changing your blendshape names as part of the facial profile editor natively within the app.)
 
 Just a quick script to rename the arkit blendshapes on your cc3 model, in a blender project.
 This is not good code, but again, it does the job.
